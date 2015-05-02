@@ -2,7 +2,7 @@ package ru.livetex.robot
 
 import java.nio.file.Paths
 
-import akka.actor.{Actor, ActorLogging}
+import akka.actor.Actor
 import org.apache.lucene.analysis.ru.RussianAnalyzer
 import org.apache.lucene.index.DirectoryReader
 import org.apache.lucene.queryparser.simple.SimpleQueryParser
@@ -12,7 +12,8 @@ import ru.livetex.StopWords
 import spray.can.Http
 import spray.http.{HttpCharsets, HttpRequest, HttpResponse}
 
-class Echo extends Actor with ActorLogging {
+
+class Assistant extends Actor {
   val domain = "livetex.ru"
   val analyzer = new RussianAnalyzer(StopWords.RUSSIAN)
   val index = new NIOFSDirectory(Paths.get("/tmp/index-" + domain))

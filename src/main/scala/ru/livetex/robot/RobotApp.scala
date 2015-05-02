@@ -9,10 +9,10 @@ import spray.can.Http
 import scala.concurrent.duration._
 
 
-object Main extends App {
+object RobotApp extends App {
   implicit val timeout = Timeout(5.seconds)
   implicit val system = ActorSystem("ru-livetex-robot")
 
   IO(Http) ? Http.Bind(
-    system.actorOf(Props[Echo]), interface = "localhost", port = 8080)
+    system.actorOf(Props[Assistant]), interface = "localhost", port = 8080)
 }

@@ -4,16 +4,17 @@ package ru.livetex.spider
 import java.nio.file.Paths
 
 import org.apache.lucene.analysis.ru.RussianAnalyzer
-import org.apache.lucene.document.{StringField, TextField, Document, Field}
-import org.apache.lucene.index.IndexWriter
-import org.apache.lucene.index.IndexWriterConfig
+import org.apache.lucene.document.{Document, Field, StringField, TextField}
+import org.apache.lucene.index.{IndexWriter, IndexWriterConfig}
 import org.apache.lucene.store.NIOFSDirectory
 import org.jsoup.Jsoup
 import ru.livetex.StopWords
 import spray.http.Uri
+
 import scala.collection.JavaConversions._
 
-object Main extends App {
+
+object SpiderApp extends App {
   val domain = "livetex.ru"
   val history = collection.mutable.Set[String]()
 

@@ -1,5 +1,5 @@
 organization := "ru.livetex"
-name := "navigator"
+name := "navigator-engine"
 
 version := "1.0"
 
