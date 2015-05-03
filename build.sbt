@@ -1,4 +1,4 @@
-organization := "ru.livetex"
+organization := "ru.livetex.navigator"
 name := "navigator-engine"
 
 version := "1.0"

@@ -1,4 +1,4 @@
-package ru.livetex.robot
+package ru.livetex.navigator.robot
 
 import akka.actor.{ActorSystem, Props}
 import akka.io.IO

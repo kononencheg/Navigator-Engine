@@ -1,4 +1,4 @@
-package ru.livetex
+package ru.livetex.navigator
 
 import java.nio.charset.StandardCharsets
 

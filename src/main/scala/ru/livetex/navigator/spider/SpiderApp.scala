@@ -1,5 +1,4 @@
-package ru.livetex.spider
-
+package ru.livetex.navigator.spider
 
 import java.nio.file.Paths
 
@@ -8,7 +7,7 @@ import org.apache.lucene.document.{Document, Field, StringField, TextField}
 import org.apache.lucene.index.{IndexWriter, IndexWriterConfig}
 import org.apache.lucene.store.NIOFSDirectory
 import org.jsoup.Jsoup
-import ru.livetex.StopWords
+import ru.livetex.navigator.StopWords
 import spray.http.Uri
 
 import scala.collection.JavaConversions._

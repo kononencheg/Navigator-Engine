@@ -1,4 +1,4 @@
-package ru.livetex.robot
+package ru.livetex.navigator.robot
 
 import java.nio.file.Paths
 
@@ -8,15 +8,21 @@ import org.apache.lucene.index.DirectoryReader
 import org.apache.lucene.queryparser.simple.SimpleQueryParser
 import org.apache.lucene.search.IndexSearcher
 import org.apache.lucene.store.NIOFSDirectory
-import ru.livetex.StopWords
+import ru.livetex.navigator.StopWords
 import spray.can.Http
-import spray.http.{HttpCharsets, HttpRequest, HttpResponse}
+import spray.http.HttpHeaders.{`Access-Control-Allow-Credentials`, `Access-Control-Allow-Methods`, `Access-Control-Allow-Origin`}
+import spray.http._
 
 
 class Assistant extends Actor {
   val domain = "livetex.ru"
   val analyzer = new RussianAnalyzer(StopWords.RUSSIAN)
   val index = new NIOFSDirectory(Paths.get("/tmp/index-" + domain))
+  val headers = List(
+    `Access-Control-Allow-Origin`(AllOrigins),
+    `Access-Control-Allow-Methods`(HttpMethods.POST),
+    `Access-Control-Allow-Credentials`(allow=true)
+  )
 
   def receive = {
     case _: Http.Connected => sender ! Http.Register(self)
@@ -31,10 +37,10 @@ class Assistant extends Actor {
       val results = searcher.search(query, 1).scoreDocs
 
       if (results.length == 0) {
-        sender ! HttpResponse(entity = "Извините, ничем не могу вам помочь.")
+        sender ! HttpResponse(headers = headers)
       } else {
-        sender ! HttpResponse(entity =
-          searcher.doc(results(0).doc).get("url") + "\n")
+        sender ! HttpResponse(headers = headers,
+          entity = searcher.doc(results(0).doc).get("url"))
       }
 
   }
